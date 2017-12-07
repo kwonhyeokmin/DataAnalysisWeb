@@ -1,0 +1,15 @@
+{% load base_extra %}
+{% load staticfiles %}
+<div id="topbar" style="background: #000000;">
+    <div class="navbar" style="padding-left:15px;">
+        <div class="navbar-side navbar-left"></div>
+        <div class="navbar-content" style="color:#EAEAEA;">
+            <span style="font-weight:bold;">
+                <img src="{% static 'image/logo.svg' %}" width="30px">
+            </span>
+            <a class="{% navactive request 'home' %}"
+                href="{% url 'home' %}" style="color:#F6F6F6; padding:15px;">Home</a>
+        </div>
+        <div class="navbar-side navbar-right"></div>
+    </div>
+</div>
