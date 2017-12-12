@@ -1,9 +1,13 @@
 from django.views.generic import View
 from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 from .models import DataFile
+
 from pandas import DataFrame
 import numpy as np
-# Create your views here.
+
 class HomeView(View):
     template_name = 'analysis/index.html'
 
@@ -24,16 +28,25 @@ class HomeView(View):
         dflist = np.asarray(df.values.tolist())
         return {'data_list' : dflist, 'columns':list(columns) }
 
-class LineChart(View):
-    template_name = 'analysis/linecharts.html'
+class ChartData(APIView):
+    authentication_classes = []
+    permission_classes = []
 
-    def get(self, request):
+    def get(self, request, format=None):
         dataList = DataFile.objects.all()
         data = []
         for each in dataList:
             data.append(each.dic())
         df = DataFrame(data)
-        #print(df)
-        columns = ['date', 'leaf_len']
-        dataset = df[columns]
-        return render(request, self.template_name, { 'Json' : dataset.to_json() })
+
+        data = {
+            'labels': df['date'].tolist(),
+            'leaf_len': df['leaf_len'].tolist(),
+            'leaf_n': df['leaf_n'].tolist(),
+            'leaf_width': df['leaf_width'].tolist(),
+            'ped': df['ped'].tolist(),
+            'plant_len': df['plant_len'].tolist(),
+            'stem_width': df['stem_width'].tolist(),
+        }
+        return Response(data)
+

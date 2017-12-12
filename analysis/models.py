@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, IntegrityError
 from django.contrib import admin
 import datetime
 from django.utils.timezone import now
@@ -21,9 +21,7 @@ class DataFile(models.Model):
     light = models.FloatField(default=0)
 
     class Meta:
-        unique_together = (('date', 'week', 'sampleNo', 'location', 'plant_len', 'stem_width', 'leaf_len',
-                'leaf_width', 'leaf_n', 'group_blossoming', 'group_fruit', 'group_harvest', 'ped',
-                'light'))
+        unique_together = ('date', 'sampleNo')
         ordering  = ['date']
 
     def dic(self):
@@ -49,6 +47,7 @@ class DataFileAdmin(admin.ModelAdmin):
 class fileUpload(models.Model):
     file = models.FileField()
 
+from django.db import transaction
 class SampleAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         csv_file = request.FILES['file']
@@ -83,15 +82,20 @@ class SampleAdmin(admin.ModelAdmin):
                 group_harvest = float(fields[13] if fields[13]!='' else 0)
                 ped = float(fields[14] if fields[14]!='' else 0)
                 light = float(fields[15] if fields[15]!='' else 0)
-
-                DataFile.objects.create(
-                                        date=datetime.date(year=year, month=month, day=day),
-                                        week=week, sampleNo=sampleNo, location=location,
-                                        plant_len=plant_len, stem_width=stem_width,
-                                        leaf_len=leaf_len, leaf_width=leaf_width, leaf_n=leaf_n,
-                                        group_blossoming=group_blossoming, group_fruit=group_fruit,
-                                        group_harvest=group_harvest, ped=ped, light=light)
-
+                if not(year==0 and month==0 and day==0):
+                    try:
+                        with transaction.atomic():
+                            DataFile.objects.create(
+                                                    date=datetime.date(year=year, month=month, day=day),
+                                                    week=week, sampleNo=sampleNo, location=location,
+                                                    plant_len=plant_len, stem_width=stem_width,
+                                                    leaf_len=leaf_len, leaf_width=leaf_width, leaf_n=leaf_n,
+                                                    group_blossoming=group_blossoming, group_fruit=group_fruit,
+                                                    group_harvest=group_harvest,
+                                                    ped=ped,
+                                                    light=light)
+                    except IntegrityError as e:
+                        pass
 # file save
 def save(self, *args, **kwargs):
     super(DataFile, self).save(*args, **kwargs)
