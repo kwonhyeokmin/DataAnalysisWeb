@@ -1,0 +1,22 @@
+.toolbar {
+    background-color: #0f0f0f;
+}
+.navbar {
+    padding-left:15px;
+    font-weight: bold;
+}
+.navbar navbar-content {
+
+}
+.footer {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #423e61;
+    text-align: center;
+    height: 80px;
+}
+.dropdown_button {
+    display: inline-block;
+}

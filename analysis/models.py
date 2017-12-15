@@ -16,6 +16,7 @@ class DataFile(models.Model):
     leaf_n = models.FloatField(default=0)
     group_blossoming = models.FloatField(default=0)
     group_fruit = models.FloatField(default=0)
+    fruit_n = models.IntegerField(default=0)
     group_harvest = models.FloatField(default=0)
     ped = models.FloatField(default=0)
     light = models.FloatField(default=0)
@@ -27,7 +28,7 @@ class DataFile(models.Model):
     def dic(self):
         fields = [
                 'date', 'week', 'sampleNo', 'location', 'plant_len', 'stem_width', 'leaf_len',
-                'leaf_width', 'leaf_n', 'group_blossoming', 'group_fruit', 'group_harvest', 'ped',
+                'leaf_width', 'leaf_n', 'group_blossoming', 'group_fruit', 'fruit_n', 'group_harvest', 'ped',
                 'light'
         ]
         result = {}
@@ -38,7 +39,7 @@ class DataFile(models.Model):
 
 class DataFileAdmin(admin.ModelAdmin):
     list_display = ('date', 'week', 'sampleNo', 'location', 'plant_len', 'stem_width', 'leaf_len',
-                'leaf_width', 'leaf_n', 'group_blossoming', 'group_fruit', 'group_harvest', 'ped',
+                'leaf_width', 'leaf_n', 'group_blossoming', 'group_fruit', 'fruit_n', 'group_harvest', 'ped',
                 'light')
     list_per_page = 30
     search_fields = ('date', 'week', 'location')
@@ -79,9 +80,10 @@ class SampleAdmin(admin.ModelAdmin):
                 leaf_n = float(fields[10] if fields[10]!='' else 0)
                 group_blossoming = float(fields[11] if fields[11]!='' else 0)
                 group_fruit = float(fields[12] if fields[12]!='' else 0)
-                group_harvest = float(fields[13] if fields[13]!='' else 0)
-                ped = float(fields[14] if fields[14]!='' else 0)
-                light = float(fields[15] if fields[15]!='' else 0)
+                fruit_n = float(fields[13] if fields[13]!='' else 0)
+                group_harvest = float(fields[14] if fields[14]!='' else 0)
+                ped = float(fields[15] if fields[15]!='' else 0)
+                light = float(fields[16] if fields[16]!='' else 0)
                 if not(year==0 and month==0 and day==0):
                     try:
                         with transaction.atomic():
@@ -90,7 +92,7 @@ class SampleAdmin(admin.ModelAdmin):
                                                     week=week, sampleNo=sampleNo, location=location,
                                                     plant_len=plant_len, stem_width=stem_width,
                                                     leaf_len=leaf_len, leaf_width=leaf_width, leaf_n=leaf_n,
-                                                    group_blossoming=group_blossoming, group_fruit=group_fruit,
+                                                    group_blossoming=group_blossoming, group_fruit=group_fruit, fruit_n=fruit_n,
                                                     group_harvest=group_harvest,
                                                     ped=ped,
                                                     light=light)
