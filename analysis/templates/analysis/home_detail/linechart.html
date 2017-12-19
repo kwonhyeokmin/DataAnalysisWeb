@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<div class="col-md-6">
+    <h3>
+        Line Chart
+        <img class="btn-img" src='{% static "image/info.svg" %}' style="cursor: pointer; height: 20px; size: 20px">
+    </h3>
+    <div style="display: inline-block; margin: 5px">
+        <select class="selectpicker" id="select_lo">
+            Location
+            <optgroup label="위치">
+                <option selected>{{first_lo_op}}</option>
+                {% for location in location_columns %}
+                <option>{{location}}</option>
+                {% endfor %}
+            </optgroup>
+        </select>
+    </div>
+    <div style="display: inline-block; margin: 5px;">
+        <select class="selectpicker" id="select_sam">
+            Sample No.
+            <optgroup label="샘플 종류">
+                <option selected>{{first_sam_op}}</option>
+                {% for sampleNo in sampleNo_columns %}
+                <option>{{sampleNo}}</option>
+                {% endfor %}
+            </optgroup>
+        </select>
+    </div>
+    <div class="alert alert-dismissable alert-info" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            ×
+        </button>
+        <h4>
+            Alert!
+        </h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
+    </div>
+    <div>
+        <!--<canvas id="cursor" style="position: absolute;"></canvas>-->
+        <canvas id="lineChart" style="position: relative"></canvas>
+    </div>
+</div>

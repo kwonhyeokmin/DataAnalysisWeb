@@ -9,7 +9,7 @@ from pandas import DataFrame
 import numpy as np
 
 class HomeView(View):
-    template_name = 'base.html'
+    template_name = 'analysis/home.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.data_list(request))
@@ -29,15 +29,16 @@ class HomeView(View):
         ko_columns = ['일자', '요일', '개화군', '착과군', '수확군', '잎길이(cm)', '잎수(개)', '잎폭(cm)', '수광량', '위치', 'PED', '경경(mm)', 'sampleNO', '초장(cm)']
         columns = np.asarray(ko_columns)
         dflist = np.asarray(df.values.tolist())
-        print(df['location'].unique())
         return {'data_list' : dflist, 'columns':list(columns),
                 'first_sam_op':sampleNo_columns[0], 'first_lo_op':location_columns[0],
                 'location_columns':location_columns[1:], 'sampleNo_columns':sampleNo_columns[1:]}
 
 class ClientView(View):
-    template_name = 'analysis/client_index.html'
+    template_name = 'client.html'
+
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {})
+
 
 class ChartData(APIView):
     authentication_classes = []

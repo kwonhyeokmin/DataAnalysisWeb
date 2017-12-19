@@ -12,54 +12,8 @@
 </head>
 <body>
 {% include 'base/js.html' %}
-<div class="container-fluid">
-    {% include "analysis/navigation.html" %}
-    <div class="row">
-		<div class="col-md-12">
-			<div class="jumbotron">
-				<h2>Hello, world!</h2>
-				<p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-			</div>
-			<div class="row">
-				{% include 'analysis/index.html' %}
-			</div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>
-						Data Table ( first 100 rows )
-						<img id="data_table_btn" class="btn-img" src='{% static "image/info.svg" %}' style="cursor: pointer; height: 20px; size: 20px">
-					</h3>
-					<div class="alert alert-dismissable alert-info" style="display:none;">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4>Alert!</h4>
-						<strong>Warning!</strong> Best check yo self, you're not looking too good.
-					</div>
-                    <hr/>
-                    <div style="height: auto; max-height: 400px; overflow-y: auto">
-					<table class="table">
-						<thead>
-							<tr>
-								{% for column in columns %}
-								<th style="text-align:center;">{{ column }}</th>
-								{% endfor %}
-							</tr>
-						</thead>
-						<tbody>
-						{% for datas in data_list %}
-							<tr>
-								{% for data in datas %}
-									<td style="text-align:center;">{{ data }}</td>
-								{% endfor %}
-							</tr>
-						{% endfor %}
-						</tbody>
-					</table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% block content %}
+{% endblock %}
 <hr/>
 <div class="footer">
 	<div style="display: inline-block; float: left; margin-left: 200px"><img src="{% static 'image/Footer_Logo.svg' %}" style="height: 50px"/></div>

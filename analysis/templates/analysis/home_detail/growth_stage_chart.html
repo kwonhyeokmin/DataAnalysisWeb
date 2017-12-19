@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<div class="col-md-6">
+    <h3>
+        Grouth stage Chart
+        <img class="btn-img" src='{% static "image/info.svg" %}' style="cursor: pointer; height: 20px; size: 20px">
+    </h3>
+    <div class="alert alert-dismissable alert-info" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            ×
+        </button>
+        <h4>
+            Alert!
+        </h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
+    </div>
+    <div>
+        <canvas id="scatterChart" width="400" height="200"></canvas>
+    </div>
+</div>

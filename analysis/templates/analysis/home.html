@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container-fluid">
+    {% include "analysis/navigation.html" %}
+    <div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h2>Hello, world!</h2>
+				<p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+			</div>
+			<div class="row">
+				{% include 'analysis/home_detail/growth_stage_chart.html' %}
+				{% include 'analysis/home_detail/linechart.html' %}
+			</div>
+            <div class="row">
+                {% include 'analysis/home_detail/datatable.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
