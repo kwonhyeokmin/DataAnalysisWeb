@@ -34,7 +34,7 @@ class HomeView(View):
                 'location_columns':location_columns[1:], 'sampleNo_columns':sampleNo_columns[1:]}
 
 class ClientView(View):
-    template_name = 'client.html'
+    template_name = 'analysis/client.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {})

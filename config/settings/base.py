@@ -43,13 +43,11 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'analysis',
     'chartjs',
 ]
 
 THIRD_PARTY_APPS = [
-    'webpack_loader',
 ]
 
 PROJECT_APPS = [
