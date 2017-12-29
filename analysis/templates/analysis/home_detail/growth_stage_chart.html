@@ -2,9 +2,24 @@
 
 <div class="col-md-6">
     <h3>
-        Grouth stage Chart
+        생육 단계
         <img class="btn-img" src='{% static "image/info.svg" %}' style="cursor: pointer; height: 20px; size: 20px">
     </h3>
+    <div style="display: inline-block; margin: 5px">
+        <select class="selectpicker" id="select_num">
+            <optgroup label="모델">
+                <option selected>{{first_model_file}}</option>
+                {% for model_file in model_files %}
+                <option>{{model_file}}</option>
+                {% endfor %}
+            </optgroup>
+        </select>
+    </div>
+    <form id="update_form" style="display: inline-block">
+        {% csrf_token %}
+        <input type="submit" value="UPDATE" class="btn btn-success btn-xs" style="display: inline-block;">
+    </form>
+
     <div class="alert alert-dismissable alert-info" style="display:none;">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
             ×
@@ -14,6 +29,6 @@
         </h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
     </div>
     <div>
-        <canvas id="scatterChart" width="400" height="200"></canvas>
+        <canvas id="growthChart" style="position: relative"></canvas>
     </div>
 </div>
