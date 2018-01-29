@@ -35,19 +35,30 @@ class HomeView(View):
         columns = np.asarray(ko_columns)
         df_investigationDataList = np.asarray(df_investigationData.values.tolist())
 
+        # get sample unique value
         investSampleData = InvestigationData.objects.values_list('sampleNo')
         investSampleList = []
         for each in investSampleData:
             investSampleList.append(int(each[0]))
         investSample = Series(investSampleList).unique()
 
+        # get season unique value
         investSeasonData = InvestigationData.objects.values_list('season')
         investSeasonList = []
         for each in investSeasonData:
             investSeasonList.append(int(each[0]))
         investSeason = Series(investSeasonList).unique()
 
+        # get farm unique value
+        investFarmData = InvestigationData.objects.values_list('farm')
+        investFarmList = []
+        for each in investFarmData:
+            investFarmList.append(each[0])
+        investFarm = Series(investSeasonList).unique()
+
+        # get model file list
         model_files = os.listdir(UPLOAD_DIR)
+
         if len(model_files):
             first_model_file = model_files[0]
             data = {
@@ -66,13 +77,14 @@ class InvestigateData(APIView):
     def get(self, request, format=None):
         sampleNo = request.GET.get('sampleNo', None)
         season = request.GET.get('season', None)
+        # farm = request.GET.get('farm', None)
 
         dataList = InvestigationData.objects.all().filter(sampleNo=sampleNo, season=season)
+
         data = []
         for each in dataList:
             data.append(each.dic())
         df = DataFrame(data)
-
         if sampleNo!='undefined' or season!='undefined':
             data = {
                 'labels': df['date'].tolist(),
@@ -104,10 +116,9 @@ class GrowthStageData(APIView):
             for each in dataList:
                 data.append(each.dic())
             df = DataFrame(data)
-
             standard_day = df['date'][0]
             df['dataNo'] = df['date'].apply(lambda x: (x - standard_day).days + 1)
-
+            print(df['dataNo'])
             sampleSize = len(df['sampleNo'].unique())
             samples = []
             for i in range(1, sampleSize+1):

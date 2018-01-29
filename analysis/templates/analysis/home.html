@@ -1,23 +1,49 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
 {% block content %}
+<script src='{% static "js/home.js" %}'></script>
+
 <div class="container-fluid">
-    {% include "analysis/navigation.html" %}
     <div class="row">
 		<div class="col-md-12">
 			<div class="jumbotron">
-				<h2>Hello, world!</h2>
-				<p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+				<h2>생육 조사 데이터</h2>
+				<p>농장에서 조사한 생육 조사 데이터를 모니터링 합니다. 각 데이터는 작기와 샘플로 구별되어 표시됩니다.</p>
+				<div style="display: inline-block; margin: 5px">
+					<select class="selectpicker" id="select_farm" data-style="btn-primary">
+						<optgroup label="농장">
+							<option selected>부여농장</option>
+							<option>부여농장</option>
+						</optgroup>
+					</select>
+					<select class="selectpicker" id="select_season" data-style="btn-primary">
+						<optgroup label="작기">
+							<option selected>{{first_season}} 작기</option>
+							{% for season in seasons %}
+							<option>{{season}} 작기</option>
+							{% endfor %}
+						</optgroup>
+					</select>
+					<select class="selectpicker" id="select_sam" data-style="btn-primary">
+						<optgroup label="샘플 종류">
+							<option selected>샘플 번호 {{first_model_sam}}</option>
+							{% for model_sample in model_samples%}
+							<option>샘플 번호 {{model_sample}}</option>
+							{% endfor %}
+						</optgroup>
+					</select>
+				</div>
 			</div>
 			<div class="row">
 				{% include 'analysis/home_detail/growth_stage_chart.html' %}
 				{% include 'analysis/home_detail/linechart.html' %}
 			</div>
-            <div class="row">
-                {% include 'analysis/home_detail/datatable.html' %}
-            </div>
         </div>
+		<div class="col-md-12">
+		</div>
+		<div class="col-md-12">
+			{% include 'analysis/home_detail/datatable.html' %}
+		</div>
     </div>
 </div>
 {% endblock %}

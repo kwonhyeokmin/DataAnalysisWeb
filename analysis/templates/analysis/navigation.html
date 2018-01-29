@@ -1,13 +1,17 @@
-<!--{% load base_extra %}-->
 {% load staticfiles %}
-<div>
-    <div>
-        <div>
+<nav class="navbar navbar-default" role="navigation" style="background: #109173;">
+    <div class="container">
+        <div class="navbar-header">
             <span>
-                <img class="header_logo_image" src="{% static 'image/Header_Logo.png' %}" style="height:30px;margin:10px;margin-right: 60%;">
+                <a href="{% url 'index' %}"><img class="header_logo_image" src="{% static 'image/Header_Logo.png' %}" style="height:30px; margin-top: 15px"></a>
             </span>
-            <a href="{% url 'home' %}" style="margin-right: 2%">Home</a>
-            <a href="{% url 'client' %}">Client</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <div class="menu">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation"><a href="{% url 'home' %}">생육조사</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+</nav>

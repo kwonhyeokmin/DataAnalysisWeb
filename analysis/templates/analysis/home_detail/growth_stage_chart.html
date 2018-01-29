@@ -1,12 +1,12 @@
 {% load staticfiles %}
 
 <div class="col-md-6">
-    <h3>
+    <h3 style="display: inline-block; margin-right: 50%">
         생육 단계
-        <img class="btn-img" src='{% static "image/info.svg" %}' style="cursor: pointer; height: 20px; size: 20px">
+        <img class="btn-img" src='{% static "image/info.svg" %}' style="cursor: pointer; height: 20px; size: 20px;">
     </h3>
     <div style="display: inline-block; margin: 5px">
-        <select class="selectpicker" id="select_num">
+        <select class="selectpicker" id="select_model">
             <optgroup label="모델">
                 <option selected>{{first_model_file}}</option>
                 {% for model_file in model_files %}
@@ -17,7 +17,7 @@
     </div>
     <form id="update_form" style="display: inline-block">
         {% csrf_token %}
-        <input type="submit" value="UPDATE" class="btn btn-success btn-xs" style="display: inline-block;">
+        <input type="submit" class="btn-default" value="UPDATE" style="display: inline-block;">
     </form>
 
     <div class="alert alert-dismissable alert-info" style="display:none;">
