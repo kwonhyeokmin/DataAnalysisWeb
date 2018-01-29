@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <body>
+	<p style="text-align: center">
+		<img src="{% static 'image/sprout.jpg' %}" style="width: 70%; ">
+	</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="text-center">
+					<h2>생육 모니터링 시스템</h2>
+					<p></p>
+				</div>
+				<hr>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="box">
+				<div class="col-md-4">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
+						<h4>생육 조사 자료</h4>
+							<div class="icon">
+								<i class="fa fa-desktop fa-3x"></i>
+							</div>						
+						<p>작기별 생육 조사 자료를 모니터링 합니다</p>
+						<div class="ficon">
+							<a href="{% url 'home' %}" class="btn btn-default" role="button">Read more</a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.0s">
+						<h4>Multi Purpose</h4>
+						<div class="icon">
+							<i class="fa fa-heart-o fa-3x"></i>
+						</div>
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit Cras suscipit arcu libero</p>
+						<div class="ficon">
+							<a href="#" class="btn btn-default" role="button">Read more</a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<div class="wow bounceIn" data-wow-offset="0" data-wow-delay="1.6s">
+						<h4>Easy Customize</h4>
+						<div class="icon">
+							<i class="fa fa-location-arrow fa-3x"></i>
+						</div>
+						<p>Lorem ipsum dolor sit amet consectetur adipiscing elit Cras suscipit arcu libero</p>
+						<div class="ficon">
+							<a href="#" class="btn btn-default" role="button">Read more</a>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+  </body>
+{% endblock %}
